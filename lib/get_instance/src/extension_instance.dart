@@ -120,6 +120,17 @@ extension Inst on GetInterface {
     );
   }
 
+  /// async version of `Get.put()`.
+  /// Awaits for the resolution of the Future from `builder()`parameter and
+  /// stores the Instance returned.
+  Future<S> putAsync<S>(
+    AsyncInstanceBuilderCallback<S> builder, {
+    String? tag,
+    bool permanent = false,
+  }) async {
+    return put<S>(await builder(), tag: tag, permanent: permanent);
+  }
+
   /// Creates a new Class Instance [S] from the builder callback[S].
   /// Every time [find]<[S]>() is used, it calls the builder method to generate
   /// a new Instance [S].
